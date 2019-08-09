@@ -8,6 +8,8 @@ const card = document.querySelectorAll(".card");
 let moves = 0;
 let toggleCards = [];
 
+////////////////////////////////////////////////////////////////
+
 function toggleCard(clickTarget) {
     clickTarget.classList.toggle('open');
     clickTarget.classList.toggle('show');
@@ -41,7 +43,7 @@ function isClickValid(clickTarget) {
     );
 }
 
-//////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -74,7 +76,30 @@ function addMove() {
     movesText.innerHTML = moves;
 }
 
-/////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+
+function removeStar() {
+    const starList = document.querySelectorAll('.stars li');
+    for (const star of starList) {
+        if (star.style.display !== 'none') {
+            star.style.display = 'none'
+            break;
+        }
+    }
+}
+
+function checkScore() {
+    if (moves === 16 || moves === 24) {
+        removeStar();
+    }
+}
+
+
+////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////
 
 deck.addEventListener('click', event => {
     const clickTarget = event.target;
@@ -84,6 +109,7 @@ deck.addEventListener('click', event => {
         if(toggleCards.length === 2) {
             checkForMatch(clickTarget);
             addMove();
+            checkScore();
         }
     }
 });
