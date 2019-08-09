@@ -26,15 +26,48 @@ function checkForMatch() {
     } else {
         setTimeout (() => {
             toggleCard(toggleCards[0]);
-            toggleCards(toggleCards[1]);
+            toggleCard(toggleCards[1]);
             toggleCards = [];
         }, 1000);
     }
 }
 
+function isClickValid(clickTarget) {
+    return (
+        clickTarget.classList.contains('card') && 
+        !clickTarget.classList.contains('match') && 
+        toggleCards.length < 2 && 
+        !toggleCards.includes(clickTarget)
+    );
+}
+
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+function shuffleDeck() {
+    const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+    const shuffledCards = shuffle(cardsToShuffle);
+    for (const card of shuffledCards) {
+        deck.appendChild(card);
+    }
+}
+shuffleDeck();
+
+
 deck.addEventListener('click', event => {
     const clickTarget = event.target;
-    if(clickTarget.classList.contains('card') && toggleCards.length < 2) {
+    if(isClickValid(clickTarget)) {
         toggleCard(clickTarget);
         addToggleCard(clickTarget);
         if(toggleCards.length === 2) {
@@ -64,25 +97,5 @@ deck.addEventListener('click', event => {
 
 
 
-
-
-
-
-
-
-
-
 // Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
