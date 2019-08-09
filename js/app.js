@@ -5,10 +5,12 @@
 
 const deck = document.querySelector(".deck");
 const card = document.querySelectorAll(".card");
+const restart = document.querySelector('.restart');
 let moves = 0;
 let clockOff = true;
 let time = 0;
 let clockId;
+let matched = 0;
 let toggleCards = [];
 
 ////////////////////////////////////////////////////////////////
@@ -142,7 +144,48 @@ function stopClock() {
     clearInterval(clockId);
 }
 
+////////////////////////////////////////////////////////////////
+/**
+ * 
+ * =====> rest
+ **/
 
+function resetClockAndTime() {
+    stopClock();
+    clockOff = true;
+    time = 0;
+    displayTime();
+}
+
+function resetMoves() {
+    moves = 0;
+    document.querySelector('.moves').innerHTML = moves;
+}
+
+function resetStar() {
+    stars = 0;
+    const starList = document.querySelectorAll('.stars li');
+    for (star of starList) {
+        star.style.display = 'inline';
+    }
+}
+
+function resetCards() {
+    const cards = document.querySelectorAll('.deck li');
+    for (let card of cards) {
+        card.className = 'card';
+    }
+}
+
+function resetGame() {
+    resetClockAndTime();
+    resetMoves();
+    resetStar();
+    shuffleDeck();
+    resetCards();
+}
+
+restart.addEventListener('click', resetGame);
 
 
 ////////////////////////////////////////////////////////////////
