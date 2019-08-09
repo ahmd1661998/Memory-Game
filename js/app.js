@@ -5,7 +5,7 @@
 
 const deck = document.querySelector(".deck");
 const card = document.querySelectorAll(".card");
-
+let moves = 0;
 let toggleCards = [];
 
 function toggleCard(clickTarget) {
@@ -41,6 +41,8 @@ function isClickValid(clickTarget) {
     );
 }
 
+//////////////////////////////////////////
+
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -64,6 +66,15 @@ function shuffleDeck() {
 }
 shuffleDeck();
 
+////////////////////////////////////////////////////////////////
+
+function addMove() {
+    moves++;
+    const movesText = document.querySelector('.moves');
+    movesText.innerHTML = moves;
+}
+
+/////////////////////////////////////////////////////////////
 
 deck.addEventListener('click', event => {
     const clickTarget = event.target;
@@ -72,6 +83,7 @@ deck.addEventListener('click', event => {
         addToggleCard(clickTarget);
         if(toggleCards.length === 2) {
             checkForMatch(clickTarget);
+            addMove();
         }
     }
 });
