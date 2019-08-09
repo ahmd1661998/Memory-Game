@@ -6,9 +6,16 @@
 const deck = document.querySelector(".deck");
 const card = document.querySelectorAll(".card");
 let moves = 0;
+let clockOff = true;
+let time = 0;
+let clockId;
 let toggleCards = [];
 
 ////////////////////////////////////////////////////////////////
+/**
+ * 
+ * =====> toggleCard
+ **/
 
 function toggleCard(clickTarget) {
     clickTarget.classList.toggle('open');
@@ -44,6 +51,10 @@ function isClickValid(clickTarget) {
 }
 
 ////////////////////////////////////////////////////////////////
+/**
+ * 
+ * =====> shuffle
+ **/
 
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -69,6 +80,10 @@ function shuffleDeck() {
 shuffleDeck();
 
 ////////////////////////////////////////////////////////////////
+/**
+ * 
+ * =====> moves
+ **/
 
 function addMove() {
     moves++;
@@ -77,6 +92,10 @@ function addMove() {
 }
 
 ////////////////////////////////////////////////////////////////
+/**
+ * 
+ * =====> removeStar
+**/
 
 function removeStar() {
     const starList = document.querySelectorAll('.stars li');
@@ -96,6 +115,33 @@ function checkScore() {
 
 
 ////////////////////////////////////////////////////////////////
+/**
+ * 
+ * =====> clock
+ **/
+function startClock() {
+    clockId = setInterval(() => {
+        time++;
+        displayTime();
+    }, 1000);
+}
+
+function displayTime() {
+    const clock = document.querySelector('.clock');
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    clock.innerHTML = time;
+    if (seconds < 10) {
+        clock.innerHTML = `${minutes}:0${seconds}`;
+    } else {
+        clock.innerHTML = `${minutes}:${seconds}`;
+    }
+}
+
+function stopClock() {
+    clearInterval(clockId);
+}
+
 
 
 
@@ -104,6 +150,10 @@ function checkScore() {
 deck.addEventListener('click', event => {
     const clickTarget = event.target;
     if(isClickValid(clickTarget)) {
+        if (clockOff) {
+            startClock();
+            clockOff = false;
+        }
         toggleCard(clickTarget);
         addToggleCard(clickTarget);
         if(toggleCards.length === 2) {
@@ -113,27 +163,4 @@ deck.addEventListener('click', event => {
         }
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Shuffle function from http://stackoverflow.com/a/2450976
 
