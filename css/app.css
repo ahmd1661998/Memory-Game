@@ -125,9 +125,11 @@ h1 {
 
 .modal-body {
     position: relative;
-    width: 400px;
+    width: 500px;
     top: 25%;
-    left: 35%;
+    left: 32%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     background: #FFF;
 }
 
@@ -135,8 +137,22 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1.5rem;
-    border-bottom: 1px solid gray;
+    padding: 10px 1.5rem;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    color: #FFF;
+}
+
+.modal-title {
+    margin: 0 auto;
+}
+
+.modal-close-btn {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.modal-close-btn:hover {
+    color: #000;
 }
 
 .modal-close {
@@ -149,7 +165,6 @@ h1 {
     flex-direction: column;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid gray;
 }
 
 .modal-buttons {
@@ -159,12 +174,22 @@ h1 {
 }
 
 .modal-button {
-    width: 60px;
-    height: 30px;
+    width: 80px;
+    height: 35px;
+    border-radius: 8px;
+    border: none;
+    color: #FFF;
+    background-color: #8c4ed6;
+    box-shadow: 7px 7px 30px #999999;
+    transition: box-shadow 0.5s;
+    cursor: pointer;
+}
+
+.modal-button:hover {
+    box-shadow: 3px 3px 8px #6F6F6F;
 }
 
 footer {
-    border-top: 1px solid #DDD;
     text-align: center;
     margin-bottom: 20px;
 }
