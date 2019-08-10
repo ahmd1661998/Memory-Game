@@ -86,30 +86,24 @@
         </ul>
     </div>
 
-    <div id="simpleModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="modal-close-btn">&times;</span>
-                <h2>Congratulations!</h2>
+
+    <section class="modal-background hide">
+        <div class="modal-body">
+            <header class="modal-heading">
+                <h2 class="modal-title">Stats</h2>
+                <span class="modal-close">x</span>
+            </header>
+            <div class="modal-stats">
+                <span class="modal-time">Time =</span>
+                <span class="modal-stars">Stars =</span>
+                <span class="modal-moves">Moves =</span>
             </div>
-            <div class="modal-body">
-                <h3>You completed the game successfully!</h3>
-                <p>It took you
-                    <span class="hours"></span>
-                    <span class="mins"></span>
-                    <span class="seconds"></span> &
-                    <span class="moves-count"></span> to finish the game.
-                    <br> Your rating is
-                    <span class="rating"></span> out of 3.
-                </p>
-            </div>
-            <div class="replay">
-                <button type="button" class="modal-replay-btn">
-                    Replay!
-                </button>
-            </div>
+            <footer class="modal-buttons">
+                <button class="modal-button modal-cancel">Cancel</button>
+                <button class="modal-button modal-replay">Replay</button>
+            </footer>
         </div>
-    </div>
+    </section>
 
 
     <footer class="footer">

@@ -110,8 +110,57 @@ h1 {
     cursor: pointer;
 }
 
-.modal {
+.hide { /*********************/
     display: none;
+}
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-body {
+    position: relative;
+    width: 400px;
+    top: 25%;
+    left: 35%;
+    background: #FFF;
+}
+
+.modal-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+    border-bottom: 1px solid gray;
+}
+
+.modal-close {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.modal-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid gray;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem;
+}
+
+.modal-button {
+    width: 60px;
+    height: 30px;
 }
 
 footer {
