@@ -6,11 +6,14 @@
 const deck = document.querySelector(".deck");
 const card = document.querySelectorAll(".card");
 const restart = document.querySelector('.restart');
+const cancel = document.querySelector('.modal-cancel');
+const replay = document.querySelector('.modal-replay');
 let moves = 0;
 let clockOff = true;
 let time = 0;
 let clockId;
 let matched = 0;
+const TOTAL_PAIRS = 8;
 let toggleCards = [];
 
 ////////////////////////////////////////////////////////////////
@@ -34,6 +37,8 @@ function checkForMatch() {
         toggleCards[0].classList.toggle('match');
         toggleCards[1].classList.toggle('match');
         toggleCards = [];
+        matched++;
+        gameOver()
     } else {
         setTimeout (() => {
             toggleCard(toggleCards[0]);
@@ -178,6 +183,8 @@ function resetCards() {
 }
 
 function resetGame() {
+    matched = 0;
+    toggleCards = [];
     resetClockAndTime();
     resetMoves();
     resetStar();
@@ -187,6 +194,61 @@ function resetGame() {
 
 restart.addEventListener('click', resetGame);
 
+
+////////////////////////////////////////////////////////////////
+/**
+ * 
+ * =====> model
+ **/
+
+function toggleModal() {
+    const model = document.querySelector('.modal-background');
+    model.classList.toggle('hide');
+}
+
+function getStars() {
+    stars = document.querySelectorAll('.stars li');
+    starCount = 0;
+    for (star of stars) {
+        if(star.style.display !== 'none') {
+            starCount++;
+        }
+    }
+    return starCount;
+}
+
+function writeModalStats() {
+    const timeStat = document.querySelector('.modal-time');
+    const moveStat = document.querySelector('.modal-moves');
+    const starsStat = document.querySelector('.modal-stars');
+    const clockTime= document.querySelector('.clock').innerHTML;
+    const stars = getStars();
+
+    timeStat.innerHTML = `Time = ${clockTime}`;
+    moveStat.innerHTML = `Moves = ${moves}`;
+    starsStat.innerHTML = `Stars = ${stars}`;
+}
+
+
+
+function gameOver() {
+    if (matched === TOTAL_PAIRS) {
+        stopClock();
+        writeModalStats();
+        toggleModal();
+    }
+}
+
+function replayGame() {
+    resetGame();
+    toggleModal();
+}
+
+cancel.addEventListener('click', () => {
+    toggleModal();
+});
+
+replay.addEventListener('click', replayGame);
 
 ////////////////////////////////////////////////////////////////
 
